@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quote Generator</title>
+</head>
+<body>
+    <h1>Daily Developer Quote</h1>
+    <h3 id="quote-display">Click the button for inspiration...</h3>
+    <button onclick="fetchQuote()">Get Quote</button>
+
+    <script>
+        async function fetchQuote() {
+            try {
+                const response = await fetch('http://127.0.0.1:5000/api/quote');
+                const data = await response.json();
+                document.getElementById('quote-display').innerText = `"${data.quote}"`;
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('quote-display').innerText = "Failed to load quote :(";
+            }
+        }
+    </script>
+</body>
+</html>
